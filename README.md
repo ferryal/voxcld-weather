@@ -104,7 +104,7 @@ The application features:
    The application uses the OpenWeatherMap API. The API key is already configured in the application:
 
    ```
-   API Key: cb1458bd084ed663910617c67772dc26
+   API Key: <your-api-key>
    ```
 
    If you need to use your own API key:

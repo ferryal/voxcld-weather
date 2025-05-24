@@ -1,19 +1,20 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Observable, throwError } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 import {
   WeatherData,
   CityWeather,
   ForecastData,
-} from '../models/weather.interface';
+} from "../models/weather.interface";
+import { environment } from "../../environments/environment";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class WeatherService {
-  private readonly API_KEY = 'cb1458bd084ed663910617c67772dc26';
-  private readonly BASE_URL = 'https://api.openweathermap.org/data/2.5';
+  private readonly API_KEY = environment.apiKey;
+  private readonly BASE_URL = "https://api.openweathermap.org/data/2.5";
 
   constructor(private http: HttpClient) {}
 
@@ -47,7 +48,7 @@ export class WeatherService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An unknown error occurred';
+    let errorMessage = "An unknown error occurred";
 
     if (error.error instanceof ErrorEvent) {
       // Client-side error
@@ -57,13 +58,13 @@ export class WeatherService {
       switch (error.status) {
         case 404:
           errorMessage =
-            'City not found. Please check the spelling and try again.';
+            "City not found. Please check the spelling and try again.";
           break;
         case 401:
-          errorMessage = 'Invalid API key.';
+          errorMessage = "Invalid API key.";
           break;
         case 429:
-          errorMessage = 'Too many requests. Please try again later.';
+          errorMessage = "Too many requests. Please try again later.";
           break;
         default:
           errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
